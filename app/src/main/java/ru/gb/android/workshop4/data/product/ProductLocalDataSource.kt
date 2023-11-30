@@ -12,13 +12,18 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
 import javax.inject.Inject
 
-class ProductLocalDataSource @Inject constructor(
+interface ProductLocalDataSource {
+    fun consumeProducts(): Flow<List<ProductEntity>>
+    suspend fun saveProducts(products: List<ProductEntity>)
+}
+
+class ProductLocalDataSourceImpl(
     private val dataStore: DataStore<Preferences>,
-) {
-    fun consumeProducts(): Flow<List<ProductEntity>> = dataStore.data
+) : ProductLocalDataSource {
+    override fun consumeProducts(): Flow<List<ProductEntity>> = dataStore.data
         .map(::mapProductFromPrefs)
 
-    suspend fun saveProducts(products: List<ProductEntity>) {
+    override suspend fun saveProducts(products: List<ProductEntity>) {
         dataStore.edit { prefs -> prefs[productPreferencesKey] = encodeToString(products) }
     }
 

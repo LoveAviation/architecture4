@@ -13,6 +13,10 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import retrofit2.Retrofit
 import ru.gb.android.workshop4.data.product.ProductApiService
+import ru.gb.android.workshop4.data.product.ProductLocalDataSource
+import ru.gb.android.workshop4.data.product.ProductLocalDataSourceImpl
+import ru.gb.android.workshop4.data.product.ProductRemoteDataSource
+import ru.gb.android.workshop4.data.product.ProductRemoteDataSourceImpl
 import ru.gb.android.workshop4.data.promo.PromoApiService
 import javax.inject.Singleton
 
@@ -50,5 +54,25 @@ object DataModule {
         @ApplicationContext applicationContext: Context
     ): DataStore<Preferences> {
         return applicationContext.appDataStore
+    }
+
+    @Singleton
+    @Provides
+    fun provideProductLocalDataSource(
+        dataStore: DataStore<Preferences>
+    ): ProductLocalDataSource {
+        return ProductLocalDataSourceImpl(
+            dataStore = dataStore
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun provideProductRemoteDataSource(
+        productApiService: ProductApiService,
+    ): ProductRemoteDataSource {
+        return ProductRemoteDataSourceImpl(
+            productApiService = productApiService
+        )
     }
 }

@@ -1,11 +1,13 @@
 package ru.gb.android.workshop4.data.product
 
-import javax.inject.Inject
+interface ProductRemoteDataSource {
+    suspend fun getProducts(): List<ProductDto>
+}
 
-class ProductRemoteDataSource @Inject constructor(
+class ProductRemoteDataSourceImpl (
     private val productApiService: ProductApiService,
-) {
-    suspend fun getProducts(): List<ProductDto> {
+): ProductRemoteDataSource {
+    override suspend fun getProducts(): List<ProductDto> {
         return productApiService.getProducts()
     }
 }

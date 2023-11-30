@@ -1,14 +1,10 @@
 package ru.gb.android.workshop4.presentation.promo
 
-import android.content.Context
-
-typealias ErrorProvider = (Context) -> String
-
 data class PromoScreenState(
     val isLoading: Boolean = false,
     val promoListState: List<PromoState> = emptyList(),
     val hasError: Boolean = false,
-    val errorProvider: ErrorProvider = { "" },
+    val errorRes: Int = 0,
 )
 
 data class PromoState(

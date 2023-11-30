@@ -1,9 +1,5 @@
 package ru.gb.android.workshop4.presentation.product
 
-import android.content.Context
-
-typealias ErrorProvider = (Context) -> String
-
 data class ProductsScreenState(
     val isLoading: Boolean = false,
     val productListState: List<ProductState> = emptyList(),

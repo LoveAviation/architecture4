@@ -8,12 +8,12 @@ data class ProductsScreenState(
     val isLoading: Boolean = false,
     val productListState: List<ProductState> = emptyList(),
     val hasError: Boolean = false,
-    val errorProvider: ErrorProvider = { "" },
+    val errorRes: Int = 0,
 )
 
 data class ProductState(
-    val id: String,
-    val name: String,
-    val image: String,
-    val price: String,
+    val id: String = "",
+    val name: String = "",
+    val image: String = "",
+    val price: String = "",
 )

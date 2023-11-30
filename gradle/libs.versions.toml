@@ -21,9 +21,15 @@ datastore-core = "1.0.0"
 kotlinSerialization = "1.5.31"
 serializationJson = "1.2.2"
 androidXDatastore = "1.0.0"
+rxandroid = "2.1.1"
 kotlinx-coroutines-rx2 = "1.7.3"
+coroutines = "1.7.3"
 dagger = "2.48"
 hilt = "2.44"
+mockitoCore = "4.7.0"
+mockitoKotlin = "4.0.0"
+mockitoInline = "5.1.1"
+immutableCollection = "0.3.5"
 
 
 [libraries]
@@ -54,9 +60,18 @@ dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
 daggerCompiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hiltCompiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
+test-junit = { module = "junit:junit", version.ref = "junit" }
+test-mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoCore" }
+test-mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockitoKotlin" }
+test-mockito-inline = { module = "org.mockito:mockito-inline", version.ref = "mockitoInline" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
+
 
 [bundles]
 network = ["okhttp", "okhttp-logging-interceptor", "retrofit", "retrofit-converter-gson"]
+mockTesting = ["test-junit", "test-mockito-core", "test-mockito-kotlin", "test-mockito-inline", "kotlinx-coroutines-test"]
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

@@ -17,7 +17,7 @@ class PromoListViewModel @Inject constructor() : ViewModel() {
         requestPromos()
     }
 
-    private fun requestPromos() {
+    fun requestPromos() {
 
     }
 

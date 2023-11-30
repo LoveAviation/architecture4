@@ -39,7 +39,7 @@ class ProductListViewModel @Inject constructor(
         requestProducts()
     }
 
-    private fun requestProducts() {
+    fun requestProducts() {
         viewModelScope.launch(Dispatchers.IO) {
             val products = productRemoteDataSource.getProducts()
             productLocalDataSource.saveProducts(
@@ -69,7 +69,7 @@ class ProductListViewModel @Inject constructor(
                 _state.update { screenState ->
                     screenState.copy(
                         hasError = true,
-                        errorProvider = { context -> context.getString(R.string.error_wile_loading_data) }
+                        errorRes = R.string.error_wile_loading_data,
                     )
                 }
             }

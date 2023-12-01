@@ -15,10 +15,8 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import ru.gb.android.workshop4.data.product.ProductDataMapper
-import ru.gb.android.workshop4.data.product.ProductEntity
 import ru.gb.android.workshop4.data.product.ProductLocalDataSource
 import ru.gb.android.workshop4.data.product.ProductRemoteDataSource
-import ru.gb.android.workshop4.domain.product.Product
 import ru.gb.android.workshop4.domain.product.ProductDomainMapper
 import ru.gb.android.workshop4.marketsample.R
 import javax.inject.Inject
@@ -34,10 +32,6 @@ class ProductListViewModel @Inject constructor(
 
     private val _state = MutableStateFlow(ProductsScreenState())
     val state: StateFlow<ProductsScreenState> = _state.asStateFlow()
-
-    init {
-        requestProducts()
-    }
 
     fun requestProducts() {
         viewModelScope.launch(Dispatchers.IO) {

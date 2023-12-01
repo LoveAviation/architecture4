@@ -48,6 +48,8 @@ class PromoListFragment : Fragment() {
         }
 
         subscribeUI()
+
+        viewModel.requestPromos()
     }
 
     private fun subscribeUI() {

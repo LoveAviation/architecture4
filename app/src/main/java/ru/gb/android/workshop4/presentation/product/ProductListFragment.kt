@@ -48,6 +48,8 @@ class ProductListFragment : Fragment() {
         }
 
         subscribeUI()
+
+        viewModel.requestProducts()
     }
 
     private fun subscribeUI() {

@@ -25,11 +25,7 @@ class PromoListViewModel @Inject constructor(
     private val _state = MutableStateFlow(PromoScreenState())
     val state: StateFlow<PromoScreenState> = _state.asStateFlow()
 
-    init {
-        requestPromos()
-    }
-
-    private fun requestPromos() {
+    fun requestPromos() {
         consumePromosUseCase()
             .map { promos ->
                 promos.map(promoStateFactory::map)

@@ -25,10 +25,6 @@ class ProductListViewModel @Inject constructor(
     private val _state = MutableStateFlow(ProductsScreenState())
     val state: StateFlow<ProductsScreenState> = _state.asStateFlow()
 
-    init {
-        requestProducts()
-    }
-
     fun requestProducts() {
         consumeProductsUseCase()
             .map { products ->

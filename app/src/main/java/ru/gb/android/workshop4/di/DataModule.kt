@@ -12,6 +12,8 @@ import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import retrofit2.Retrofit
+import ru.gb.android.workshop4.data.favorites.FavoritesDataSource
+import ru.gb.android.workshop4.data.favorites.FavoritesDataSourceImpl
 import ru.gb.android.workshop4.data.product.ProductApiService
 import ru.gb.android.workshop4.data.product.ProductLocalDataSource
 import ru.gb.android.workshop4.data.product.ProductLocalDataSourceImpl
@@ -73,6 +75,16 @@ object DataModule {
     ): ProductRemoteDataSource {
         return ProductRemoteDataSourceImpl(
             productApiService = productApiService
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun provideFavoritesDataSource(
+        dataStore: DataStore<Preferences>,
+    ): FavoritesDataSource {
+        return FavoritesDataSourceImpl(
+            dataStore = dataStore
         )
     }
 }

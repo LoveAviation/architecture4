@@ -59,4 +59,12 @@ class ProductListViewModel @Inject constructor(
     fun errorHasShown() {
         _state.update { screenState -> screenState.copy(hasError = false) }
     }
+
+    fun addToFavorites(favoriteId: String) {
+
+    }
+
+    fun removeFromFavorites(favoriteId: String) {
+
+    }
 }

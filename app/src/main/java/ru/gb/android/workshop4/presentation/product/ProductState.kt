@@ -12,4 +12,5 @@ data class ProductState(
     val name: String = "",
     val image: String = "",
     val price: String = "",
+    val isFavorite: Boolean = false,
 )

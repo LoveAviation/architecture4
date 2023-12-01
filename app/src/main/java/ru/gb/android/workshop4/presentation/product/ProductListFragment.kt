@@ -15,16 +15,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import ru.gb.android.workshop4.marketsample.databinding.FragmentProductListBinding
 import ru.gb.android.workshop4.presentation.product.adapter.ProductsAdapter
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class ProductListFragment : Fragment() {
 
     private var _binding: FragmentProductListBinding? = null
     private val binding get() = _binding!!
-
-    @Inject
-    lateinit var adapter: ProductsAdapter
 
     private val viewModel: ProductListViewModel by viewModels()
 
@@ -40,7 +36,10 @@ class ProductListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.recyclerView.adapter = adapter
+        binding.recyclerView.adapter = ProductsAdapter(
+            onAddToFavorites = { favoriteId -> viewModel.addToFavorites(favoriteId) },
+            onRemoveFromFavorites = { favoriteId -> viewModel.removeFromFavorites(favoriteId) },
+        )
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
 
         binding.swipeRefreshLayout.setOnRefreshListener {
@@ -80,7 +79,7 @@ class ProductListFragment : Fragment() {
     private fun showProductList(productListState: List<ProductState>) {
         binding.progress.visibility = View.GONE
         binding.recyclerView.visibility = View.VISIBLE
-        adapter.submitList(productListState)
+        (binding.recyclerView.adapter as ProductsAdapter).submitList(productListState)
     }
 
     private fun showLoading() {

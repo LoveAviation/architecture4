@@ -10,15 +10,19 @@ import ru.gb.android.workshop4.marketsample.databinding.ItemProductBinding
 import ru.gb.android.workshop4.presentation.product.ProductState
 import javax.inject.Inject
 
-@FragmentScoped
-class ProductsAdapter @Inject constructor() :
+class ProductsAdapter(
+    private val onAddToFavorites: (String) -> Unit,
+    private val onRemoveFromFavorites: (String) -> Unit,
+) :
     ListAdapter<ProductState, ProductHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductHolder {
         return ProductHolder(
-            ItemProductBinding.inflate(
+            binding = ItemProductBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
-            )
+            ),
+            onAddToFavorites = onAddToFavorites,
+            onRemoveFromFavorites = onRemoveFromFavorites
         )
     }
 

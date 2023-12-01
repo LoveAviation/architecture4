@@ -1,5 +1,8 @@
 package ru.gb.android.workshop4.presentation.product.adapter
 
+import android.content.res.ColorStateList
+import android.graphics.Color
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import ru.gb.android.workshop4.marketsample.R
@@ -8,6 +11,8 @@ import ru.gb.android.workshop4.presentation.product.ProductState
 
 class ProductHolder(
     private val binding: ItemProductBinding,
+    private val onAddToFavorites: (String) -> Unit,
+    private val onRemoveFromFavorites: (String) -> Unit,
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(productState: ProductState) {
@@ -15,5 +20,14 @@ class ProductHolder(
         binding.name.text = productState.name
         binding.price.text =
             binding.root.resources.getString(R.string.price_with_arg, productState.price)
+        if (productState.isFavorite) {
+            binding.favorite.setImageResource(R.drawable.ic_favorite_on)
+            binding.favorite.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(binding.root.context, R.color.reddish))
+            binding.favorite.setOnClickListener { onRemoveFromFavorites(productState.id) }
+        } else {
+            binding.favorite.setImageResource(R.drawable.ic_favorite_off)
+            binding.favorite.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(binding.root.context, R.color.grey))
+            binding.favorite.setOnClickListener { onAddToFavorites(productState.id) }
+        }
     }
 }

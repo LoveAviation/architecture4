@@ -2,7 +2,6 @@ package ru.gb.android.workshop4.data.promo
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -19,7 +18,7 @@ class PromoRepository @Inject constructor(
     private val scope = CoroutineScope(SupervisorJob() + dispatcher)
 
     fun consumePromos(): Flow<List<PromoEntity>> {
-        scope.launch(Dispatchers.IO) {
+        scope.launch {
             val promos = promoRemoteDataSource.getPromos()
             promoLocalDataSource.savePromos(
                 promos.map(promoDataMapper::toEntity)

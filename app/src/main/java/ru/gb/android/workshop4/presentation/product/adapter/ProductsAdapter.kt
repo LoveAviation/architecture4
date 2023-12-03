@@ -32,6 +32,20 @@ class ProductsAdapter(
             holder.bind(entity)
         }
     }
+
+    override fun onBindViewHolder(
+        holder: ProductHolder,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
+        if (payloads.isEmpty()) {
+            super.onBindViewHolder(holder, position, payloads)
+        } else {
+            if (payloads[0] == true) {
+                holder.bindFavorite(getItem(position))
+            }
+        }
+    }
 }
 
 private class DiffCallback : DiffUtil.ItemCallback<ProductState>() {
@@ -42,5 +56,13 @@ private class DiffCallback : DiffUtil.ItemCallback<ProductState>() {
 
     override fun areContentsTheSame(oldItem: ProductState, newItem: ProductState): Boolean {
         return oldItem == newItem
+    }
+
+    override fun getChangePayload(oldItem: ProductState, newItem: ProductState): Any? {
+        if (oldItem.isFavorite != newItem.isFavorite) {
+            return true
+        }
+
+        return null
     }
 }

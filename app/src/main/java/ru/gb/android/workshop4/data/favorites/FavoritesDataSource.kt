@@ -34,7 +34,7 @@ class FavoritesDataSourceImpl(
     override suspend fun removeFavorite(favoriteEntity: FavoriteEntity) {
         dataStore.edit { prefs ->
             val currentFavorites = mapFromPrefs(prefs).toMutableSet()
-            currentFavorites.remove(favoriteEntity)
+            currentFavorites.removeIf { it.id == favoriteEntity.id }
             prefs[preferencesKey] = Json.encodeToString(currentFavorites.toList())
         }
     }

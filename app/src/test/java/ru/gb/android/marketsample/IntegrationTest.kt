@@ -27,7 +27,7 @@ import ru.gb.android.workshop4.data.product.ProductRemoteDataSource
 import ru.gb.android.workshop4.data.product.ProductRepository
 import ru.gb.android.workshop4.domain.product.ConsumeProductsUseCase
 import ru.gb.android.workshop4.domain.product.ProductDomainMapper
-import ru.gb.android.workshop4.presentation.common.PriceFormatter
+import ru.gb.android.workshop4.presentation.common.PriceFormatterImpl
 import ru.gb.android.workshop4.presentation.product.ProductListViewModel
 import ru.gb.android.workshop4.presentation.product.ProductState
 import ru.gb.android.workshop4.presentation.product.ProductStateFactory
@@ -68,7 +68,7 @@ class IntegrationTest {
         )
         sut = ProductListViewModel(
             consumeProductsUseCase = consumeProductsUseCase,
-            productStateFactory = ProductStateFactory(priceFormatter = PriceFormatter()),
+            productStateFactory = ProductStateFactory(priceFormatter = PriceFormatterImpl()),
         )
     }
 

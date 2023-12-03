@@ -1,7 +1,6 @@
 package ru.gb.android.workshop4.domain.product
 
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import ru.gb.android.workshop4.data.product.ProductRepository
 import javax.inject.Inject

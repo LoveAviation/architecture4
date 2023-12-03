@@ -19,7 +19,7 @@ class ProductDomainMapper @Inject constructor() {
             id = productEntity.id,
             name = productEntity.name,
             image = productEntity.image,
-            price = productEntity.price
+            price = productEntity.price,
         )
     }
 

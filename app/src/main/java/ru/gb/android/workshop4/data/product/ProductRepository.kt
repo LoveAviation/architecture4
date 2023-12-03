@@ -19,7 +19,7 @@ class ProductRepository @Inject constructor(
     private val scope = CoroutineScope(SupervisorJob() + dispatcher)
 
     fun consumeProducts(): Flow<List<ProductEntity>> {
-        scope.launch(Dispatchers.IO) {
+        scope.launch {
             val products = productRemoteDataSource.getProducts()
             productLocalDataSource.saveProducts(
                 products.map(productDataMapper::toEntity)

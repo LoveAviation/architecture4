@@ -67,8 +67,9 @@ class ProductListFragment : Fragment() {
 
                                 viewModel.errorHasShown()
                             }
-
-                            else -> showProductList(productListState = state.productListState)
+                            else -> {
+                                showProductList(productListState = state.productListState)
+                            }
                         }
                     }
                 }
@@ -79,6 +80,7 @@ class ProductListFragment : Fragment() {
     private fun showProductList(productListState: List<ProductState>) {
         binding.progress.visibility = View.GONE
         binding.recyclerView.visibility = View.VISIBLE
+
         (binding.recyclerView.adapter as ProductsAdapter).submitList(productListState)
     }
 

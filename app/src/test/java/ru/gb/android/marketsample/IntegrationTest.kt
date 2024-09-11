@@ -25,6 +25,8 @@ import ru.gb.android.workshop4.data.product.ProductEntity
 import ru.gb.android.workshop4.data.product.ProductLocalDataSource
 import ru.gb.android.workshop4.data.product.ProductRemoteDataSource
 import ru.gb.android.workshop4.data.product.ProductRepository
+import ru.gb.android.workshop4.domain.favorites.AddFavoriteUseCase
+import ru.gb.android.workshop4.domain.favorites.RemoveFavoriteUseCase
 import ru.gb.android.workshop4.domain.product.ConsumeProductsUseCase
 import ru.gb.android.workshop4.domain.product.ProductDomainMapper
 import ru.gb.android.workshop4.presentation.common.PriceFormatterImpl
@@ -49,6 +51,12 @@ class IntegrationTest {
     @Mock
     lateinit var productRemoteDataSource: ProductRemoteDataSource
 
+    @Mock
+    lateinit var addFavoriteUseCase: AddFavoriteUseCase
+
+    @Mock
+    lateinit var removeFavoriteUseCase: RemoveFavoriteUseCase
+
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule(StandardTestDispatcher())
 
@@ -69,6 +77,8 @@ class IntegrationTest {
         sut = ProductListViewModel(
             consumeProductsUseCase = consumeProductsUseCase,
             productStateFactory = ProductStateFactory(priceFormatter = PriceFormatterImpl()),
+            addFavoriteUseCase = addFavoriteUseCase,
+            removeFavoriteUseCase = removeFavoriteUseCase
         )
     }
 
@@ -82,8 +92,8 @@ class IntegrationTest {
         val expectedDataState = ProductsScreenState(
             isLoading = false,
             productListState = listOf(
-                ProductState(id = "1", price = "100.00"),
-                ProductState(id = "2", price = "200.00"),
+                ProductState(id = "1", price = "100,00"),
+                ProductState(id = "2", price = "200,00"),
             )
         )
         val (job, results) = collectResults()

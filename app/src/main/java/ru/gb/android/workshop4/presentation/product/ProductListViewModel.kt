@@ -12,6 +12,9 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import ru.gb.android.workshop4.domain.favorites.AddFavoriteUseCase
+import ru.gb.android.workshop4.domain.favorites.RemoveFavoriteUseCase
 import ru.gb.android.workshop4.domain.product.ConsumeProductsUseCase
 import ru.gb.android.workshop4.marketsample.R
 import javax.inject.Inject
@@ -20,6 +23,8 @@ import javax.inject.Inject
 class ProductListViewModel @Inject constructor(
     private val consumeProductsUseCase: ConsumeProductsUseCase,
     private val productStateFactory: ProductStateFactory,
+    private val addFavoriteUseCase: AddFavoriteUseCase,
+    private val removeFavoriteUseCase: RemoveFavoriteUseCase
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(ProductsScreenState())
@@ -61,10 +66,14 @@ class ProductListViewModel @Inject constructor(
     }
 
     fun addToFavorites(favoriteId: String) {
-
+        viewModelScope.launch {
+            addFavoriteUseCase.addFavorite(favoriteId)
+        }
     }
 
     fun removeFromFavorites(favoriteId: String) {
-
+        viewModelScope.launch {
+            removeFavoriteUseCase.removeFavorite(favoriteId)
+        }
     }
 }

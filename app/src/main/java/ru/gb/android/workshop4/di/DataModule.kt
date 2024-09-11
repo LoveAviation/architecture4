@@ -14,12 +14,15 @@ import kotlinx.coroutines.Dispatchers
 import retrofit2.Retrofit
 import ru.gb.android.workshop4.data.favorites.FavoritesDataSource
 import ru.gb.android.workshop4.data.favorites.FavoritesDataSourceImpl
+import ru.gb.android.workshop4.data.favorites.FavoritesRepository
 import ru.gb.android.workshop4.data.product.ProductApiService
 import ru.gb.android.workshop4.data.product.ProductLocalDataSource
 import ru.gb.android.workshop4.data.product.ProductLocalDataSourceImpl
 import ru.gb.android.workshop4.data.product.ProductRemoteDataSource
 import ru.gb.android.workshop4.data.product.ProductRemoteDataSourceImpl
 import ru.gb.android.workshop4.data.promo.PromoApiService
+import ru.gb.android.workshop4.domain.favorites.AddFavoriteUseCase
+import ru.gb.android.workshop4.domain.favorites.RemoveFavoriteUseCase
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
@@ -85,6 +88,26 @@ object DataModule {
     ): FavoritesDataSource {
         return FavoritesDataSourceImpl(
             dataStore = dataStore
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun provideAddFavoriteUseCase(
+        favoritesRepository: FavoritesRepository,
+    ): AddFavoriteUseCase {
+        return AddFavoriteUseCase(
+            favoritesRepository = favoritesRepository
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun provideRemoveFavoriteUseCase(
+        favoritesRepository: FavoritesRepository,
+    ): RemoveFavoriteUseCase {
+        return RemoveFavoriteUseCase(
+            favoritesRepository = favoritesRepository
         )
     }
 }

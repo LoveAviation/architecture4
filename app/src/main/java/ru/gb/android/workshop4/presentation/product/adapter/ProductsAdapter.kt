@@ -30,6 +30,7 @@ class ProductsAdapter(
         val entity = getItem(position)
         entity?.let {
             holder.bind(entity)
+            holder.bindFavorite(entity)
         }
     }
 

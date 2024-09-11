@@ -14,7 +14,7 @@ class ProductRepository @Inject constructor(
     private val productLocalDataSource: ProductLocalDataSource,
     private val productRemoteDataSource: ProductRemoteDataSource,
     private val productDataMapper: ProductDataMapper,
-    private val dispatcher: CoroutineDispatcher,
+    dispatcher: CoroutineDispatcher,
 ) {
     private val scope = CoroutineScope(SupervisorJob() + dispatcher)
 

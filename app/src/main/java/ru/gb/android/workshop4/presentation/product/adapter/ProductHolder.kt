@@ -21,7 +21,6 @@ class ProductHolder(
         binding.price.text =
             binding.root.resources.getString(R.string.price_with_arg, productState.price)
 
-        bindFavorite(productState)
     }
 
     fun bindFavorite(productState: ProductState) {
@@ -31,6 +30,8 @@ class ProductHolder(
             binding.favorite.setOnClickListener {
                 onRemoveFromFavorites(productState.id)
                 binding.favorite.bump()
+                productState.isFavorite = false
+                bindFavorite(productState)
             }
         } else {
             binding.favorite.setImageResource(R.drawable.ic_favorite_off)
@@ -38,7 +39,10 @@ class ProductHolder(
             binding.favorite.setOnClickListener {
                 onAddToFavorites(productState.id)
                 binding.favorite.bump()
+                productState.isFavorite = true
+                bindFavorite(productState)
             }
         }
+
     }
 }
